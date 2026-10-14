@@ -117,7 +117,7 @@ const callModel = async (state) => {
     ...state.messages,
   ]);
 
-  console.log("call model: ", response);
+  console.log("call model: ", response.tool_calls);
 
   return { messages: [response] };
 };
@@ -128,6 +128,7 @@ const callModel = async (state) => {
 function shouldContinue(state) {
   const lastMessage = state.messages[state.messages.length - 1];
   const toolCalls = lastMessage.tool_calls || [];
+  console.log("toolCalls: ", toolCalls);
 
   // Condition 1: no tool requested, so the answer is final
   if (toolCalls.length === 0) {
